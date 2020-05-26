@@ -1,1 +1,1 @@
-# Pok-mon-React
+# Pokemon-React
