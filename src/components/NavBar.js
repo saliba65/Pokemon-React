@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 /*
 export default class NavBar extends Component {
@@ -8,11 +8,9 @@ export default class NavBar extends Component {
 const NavBar = () => {
   return (
     <div>
-      <h1>
-        null
-      </h1>
+      <h1>null</h1>
     </div>
-  )
-}
+  );
+};
 
 export default NavBar;

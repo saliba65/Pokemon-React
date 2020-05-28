@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PokemonCard from "components/core/PokemonCard";
 import NavBar from "components/NavBar";
+//import axios from 'axios'
 
 /*
 const pokemons = [
@@ -21,6 +22,20 @@ const Home = () => {
     "Squirtle",
     "Bulbasaur",
   ]);
+
+  //const [currentPageUrl, setCurrentPageUrl] = useState("endereco API")
+  //const [nextPageUrl, setNextPageUrl] = useState()
+  //const [prevPageUrl, setPrevPageUrl] = useState()
+
+  /*const [pokemon, setPokemon] = useState([])
+    
+    useEffect(() => {
+    axios.get("endereco API").then(res => {
+      setNextPageUrl(res.data.next)
+      setPrevPageUrl(res.data.previous)
+      setPokemon(res.data.results.map(p => p.name))
+    }, [currentPageUril])
+  */
 
   return <PokemonCard pokemon={pokemon} />;
 

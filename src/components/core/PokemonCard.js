@@ -3,11 +3,11 @@ import React from "react";
 const PokemonCard = ({ pokemon }) => {
   return (
     <div>
-      {pokemon.map(p => (
+      {pokemon.map((p) => (
         <div key={p}> {p}</div>
       ))}
     </div>
-  )
+  );
 };
 
 export default PokemonCard;
