@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PokemonCard from "components/core/PokemonCard";
-import NavBar from "components/NavBar";
-//import axios from 'axios'
+//import NavBar from "components/NavBar";
+import axios from "axios";
 
 /*
 const pokemons = [
@@ -13,29 +13,35 @@ const pokemons = [
   {name: "Bulbasaur"} ];
   */
 
-const Home = () => {
-  const [pokemon, setPokemon] = useState([
-    "Pikachu",
-    "Charmander",
-    "MewTwo",
-    "Mew",
-    "Squirtle",
-    "Bulbasaur",
-  ]);
+function Home() {
+  const [pokemon, setPokemon] = useState([]);
 
-  //const [currentPageUrl, setCurrentPageUrl] = useState("endereco API")
-  //const [nextPageUrl, setNextPageUrl] = useState()
-  //const [prevPageUrl, setPrevPageUrl] = useState()
+  const [currentPageUrl, setCurrentPageUrl] = useState(
+    "https://pokeapi.co/api/v2/pokemon"
+  );
+  const [nextPageUrl, setNextPageUrl] = useState();
+  const [prevPageUrl, setPrevPageUrl] = useState();
+  const [loading, setLoading] = useState(true);
+  //const [pokemon, setPokemon] = useState([])
 
-  /*const [pokemon, setPokemon] = useState([])
-    
-    useEffect(() => {
-    axios.get("endereco API").then(res => {
-      setNextPageUrl(res.data.next)
-      setPrevPageUrl(res.data.previous)
-      setPokemon(res.data.results.map(p => p.name))
-    }, [currentPageUril])
-  */
+  useEffect(() => {
+    setLoading(true);
+    let cancel;
+    axios
+      .get(currentPageUrl, {
+        cancelToken: new axios.CancelToken((c) => (cancel = c)),
+      })
+      .then((res) => {
+        setLoading(false);
+        setNextPageUrl(res.data.next);
+        setPrevPageUrl(res.data.previous);
+        setPokemon(res.data.results.map((p) => p.name));
+      });
+
+    return () => cancel();
+  }, [currentPageUrl]);
+
+  if (loading) return "Loading...";
 
   return <PokemonCard pokemon={pokemon} />;
 
@@ -44,6 +50,5 @@ const Home = () => {
     return<PokemonCard name={pokemon.name} />;
     return<NavBar />
   }); */
-};
-
+}
 export default Home;
