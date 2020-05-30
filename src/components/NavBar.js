@@ -1,16 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 
-/*
-export default class NavBar extends Component {
-  render()
-} */
-
-const NavBar = () => {
+export default function NavBar({gotNextPage, gotPrevPage}) {
   return (
     <div>
-      <h1>null</h1>
+      {gotPrevPage && <button onClick={gotPrevPage}>Previous</button>}
+      {gotNextPage && <button onClick={gotNextPage}>Next</button>}
     </div>
-  );
-};
-
-export default NavBar;
+  )
+}

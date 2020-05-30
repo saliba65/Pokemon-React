@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PokemonCard from "components/core/PokemonCard";
-//import NavBar from "components/NavBar";
+import NavBar from "components/NavBar";
 import axios from "axios";
 
 /*
@@ -41,9 +41,25 @@ function Home() {
     return () => cancel();
   }, [currentPageUrl]);
 
+  function gotNextPage() {
+    setCurrentPageUrl(nextPageUrl);
+  }
+
+  function gotPrevPage() {
+    setCurrentPageUrl(prevPageUrl);
+  }
+
   if (loading) return "Loading...";
 
-  return <PokemonCard pokemon={pokemon} />;
+  return (
+    <>
+      <PokemonCard pokemon={pokemon} />
+      <NavBar
+        gotNextPage={nextPageUrl ? gotNextPage : null}
+        gotPrevPage={prevPageUrl ? gotPrevPage : null}
+      />
+    </>
+  );
 
   /*
   return pokemons.map((pokemon) => {
