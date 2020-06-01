@@ -4,6 +4,7 @@ import {
   Toolbar,
   Grid,
   Card,
+  CardMedia,
   CardContent,
   CircularProgress,
 } from "@material-ui/core";
@@ -16,12 +17,24 @@ const useSyles = makeStyles({
     paddingLeft: "50px",
     paddingRight: "50px",
   },
+  cardMedia: {
+    margin: "auto",
+  },
 });
 
-const getPokemonCard = () => {
+const getPokemonCard = (pokemonId) => {
+  console.log(pokemonData[`${pokemonId}`]);
+  const { id, name } = pokemonData[`${pokemonId}`];
+  const sprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+
   return (
-    <Grid item xs={2}>
+    <Grid item xs={2} key={pokemonId}>
       <Card>
+        <CardMedia
+          className={classes.cardMedia}
+          image={sprite}
+          style={{ width: "130px", height: "130px" }}
+        />
         <CardContent>Pokemon</CardContent>
       </Card>
     </Grid>
@@ -39,18 +52,9 @@ const Pokedex = () => {
       </AppBar>
       {pokemonData ? (
         <Grid container spacing={2} className={classes.pokedexContainer}>
-          {getPokemonCard()}
-          {getPokemonCard()}
-          {getPokemonCard()}
-          {getPokemonCard()}
-          {getPokemonCard()}
-          {getPokemonCard()}
-          {getPokemonCard()}
-          {getPokemonCard()}
-          {getPokemonCard()}
-          {getPokemonCard()}
-          {getPokemonCard()}
-          {getPokemonCard()}
+          {Object.keys(pokemonData).map((pokemonId) =>
+            getPokemonCard(pokemonId)
+          )}
         </Grid>
       ) : (
         <CircularProgress />
