@@ -7,6 +7,7 @@ import {
   CardMedia,
   CardContent,
   CircularProgress,
+  Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import mockData from "./mockData";
@@ -20,7 +21,14 @@ const useSyles = makeStyles({
   cardMedia: {
     margin: "auto",
   },
+  cardContent: {
+    textAlign: "center",
+  },
 });
+
+const toFirstCharUppercase = name => {
+  name.charAt(0).toUpperCase() + name.slice(1);
+}
 
 const getPokemonCard = (pokemonId) => {
   console.log(pokemonData[`${pokemonId}`]);
@@ -35,7 +43,9 @@ const getPokemonCard = (pokemonId) => {
           image={sprite}
           style={{ width: "130px", height: "130px" }}
         />
-        <CardContent>Pokemon</CardContent>
+        <CardContent className={classes.cardContent}>
+          <Typography>{`${id}. ${toFirstCharUppercase(name)}`}</Typography>
+        </CardContent>
       </Card>
     </Grid>
   );
