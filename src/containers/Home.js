@@ -1,22 +1,9 @@
-import React, { useState, useEffect } from "react";
-import PokemonCard from "components/core/PokemonCard";
+import React from "react";
 import Pokedex from "components/core/Pokedex";
-//import NavBar from "components/NavBar";
-//import axios from "axios";
-import { Switch, Route } from "react-router-dom";
 
-function Home() {
-  return (
-    <Switch>
-      <Route exact path="/" render={(props) => <Pokedex {...props} />} />
-      <Route
-        exact
-        path="/:pokemonId"
-        render={(props) => <PokemonCard {...props} />}
-      />
-    </Switch>
-  );
-}
+const Home = () => {
+	return <Pokedex />;
+};
 export default Home;
 
 //VERSAO 02 - REQUISICAO DE API COMPLETA

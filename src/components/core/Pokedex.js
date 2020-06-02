@@ -1,78 +1,39 @@
-import React, { useState } from "react";
-import {
-  AppBar,
-  Toolbar,
-  Grid,
-  Card,
-  CardMedia,
-  CardContent,
-  CircularProgress,
-  Typography
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import React, {useState} from "react";
+import {AppBar, Toolbar, Grid, CircularProgress} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
+import PokemonCard from "components/core/PokemonCard";
 import mockData from "./mockData";
 
 const useSyles = makeStyles({
-  pokedexContainer: {
-    paddingTop: "20px",
-    paddingLeft: "50px",
-    paddingRight: "50px",
-  },
-  cardMedia: {
-    margin: "auto",
-  },
-  cardContent: {
-    textAlign: "center",
-  },
+	pokedexContainer: {
+		paddingTop: "20px",
+		paddingLeft: "50px",
+		paddingRight: "50px",
+	},
 });
 
-const toFirstCharUppercase = name =>
-  name.charAt(0).toUpperCase() + name.slice(1);
-
-
 const Pokedex = () => {
-  const classes = useSyles();
-  const [pokemonData, setPokemonData] = useState(mockData);
+	const classes = useSyles();
+	const [pokemonData, setPokemonData] = useState(mockData);
 
-  const getPokemonCard = (pokemonId) => {
-    console.log(pokemonData[`${pokemonId}`]);
+	console.log(pokemonData);
 
-    const { id, name } = pokemonData[`${pokemonId}`];
-    const sprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
-
-    return (
-      //6 pokemons por linha item xs={2}
-      <Grid item xs={3} key={pokemonId}>
-        <Card>
-          <CardMedia
-            className={classes.cardMedia}
-            image={sprite}
-            style={{ width: "130px", height: "130px" }}
-            />
-          <CardContent className={classes.cardContent}>
-            <Typography>{`${id}.${toFirstCharUppercase(name)}`}</Typography>
-          </CardContent>
-        </Card>
-      </Grid>
-    );
-  };
-
-  return (
-    <>
-      <AppBar position="static">
-        <Toolbar />
-      </AppBar>
-      {pokemonData ? (
-        <Grid container spacing={2} className={classes.pokedexContainer}>
-          {Object.keys(pokemonData).map((pokemonId) =>
-            getPokemonCard(pokemonId)
-          )}
-        </Grid>
-      ) : (
-        <CircularProgress color="secondary" />
-      )}
-    </>
-  );
+	return (
+		<>
+			<AppBar position="static">
+				<Toolbar />
+			</AppBar>
+			{pokemonData ? (
+				<Grid container spacing={2} className={classes.pokedexContainer}>
+					{pokemonData.map((pokemon) => {
+						return <PokemonCard pokemon={pokemon} />;
+					})}
+				</Grid>
+			) : (
+				<CircularProgress color="secondary" />
+			)}
+		</>
+	);
 };
 
 export default Pokedex;
