@@ -12,7 +12,8 @@ const useSyles = makeStyles({
 	},
 });
 
-const Pokedex = () => {
+const Pokedex = (props) => {
+	//const { history } = props;
 	const classes = useSyles();
 	const [pokemonData, setPokemonData] = useState(mockData);
 

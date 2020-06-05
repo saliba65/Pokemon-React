@@ -18,6 +18,7 @@ const useSyles = makeStyles({
 });
 
 const PokemonCard = (props) => {
+	const { history } = props;
 	const classes = useSyles();
 	const {id, name} = props.pokemon;
 	const sprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
@@ -27,7 +28,7 @@ const PokemonCard = (props) => {
 	return (
 		//6 pokemons por linha item xs={2}
 		<Grid item xs={12} sm={6} md={3} lg={2} key={id}>
-			<Card>
+			<Card onClick = {() => history.push(`/${id}`)}>
 				<CardMedia
 					className={classes.cardMedia}
 					image={sprite}
