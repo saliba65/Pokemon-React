@@ -6,9 +6,9 @@ import {createBrowserHistory} from "history";
 import Home from "containers/Home";
 import Pokemon from "containers/Pokemon";
 
-const history = createBrowserHistory();
+export const history = createBrowserHistory();
 
-const Routes = () => {
+export const Routes = () => {
 	return (
 		<Router history={history}>
 			<Switch>
@@ -18,4 +18,3 @@ const Routes = () => {
 		</Router>
 	);
 };
-export default Routes;
