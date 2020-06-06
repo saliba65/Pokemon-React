@@ -6,7 +6,7 @@ import {createBrowserHistory} from "history";
 import Home from "containers/Home";
 import Pokemon from "containers/Pokemon";
 
-const history = createBrowserHistory();
+export const history = createBrowserHistory();
 
 export const Routes = () => {
 	return (
