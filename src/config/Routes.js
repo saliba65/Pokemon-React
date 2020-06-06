@@ -1,15 +1,21 @@
 import React from "react";
-import {Switch, Route} from "react-router-dom";
+import {Route, Switch} from "react-router";
+import {Router} from "react-router-dom";
+import {createBrowserHistory} from "history";
 
 import Home from "containers/Home";
 import Pokemon from "containers/Pokemon";
 
+const history = createBrowserHistory();
+
 const Routes = () => {
 	return (
-		<Switch>
-			<Route exact path="/" component={Home} />
-			<Route exact path="/:pokemonId" component={Pokemon} />
-		</Switch>
+		<Router history={history}>
+			<Switch>
+				<Route exact path="/" component={Home} />
+				<Route exact path="/:pokemonId" component={Pokemon} />
+			</Switch>
+		</Router>
 	);
 };
 export default Routes;
