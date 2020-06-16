@@ -8,6 +8,7 @@ import {
 	makeStyles,
 } from "@material-ui/core";
 import {history} from "config/Routes";
+import { toFirstCharUppercase } from "utils/constants/constants";
 
 const useSyles = makeStyles({
 	cardMedia: {
@@ -22,8 +23,6 @@ const PokemonCard = (props) => {
 	const classes = useSyles();
 	const {id, name} = props.pokemon;
 	const sprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
-	const toFirstCharUppercase = (name) =>
-		name.charAt(0).toUpperCase() + name.slice(1);
 
 	return (
 		//6 pokemons por linha item xs={2}
