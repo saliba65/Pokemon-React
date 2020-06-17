@@ -7,7 +7,12 @@ const PokemonCard = (props) => {
   const { match } = props;
   const { params } = match;
   const { pokemonId } = params;
-  const [pokemon, setPokemon] = useState(mockData[`${pokemonId}`]);
+  const [pokemon, setPokemon] = useState(
+    mockData.filter((pokemon) => {
+      console.log(pokemon.id, parseInt(pokemonId));
+      return parseInt(pokemonId) === pokemon.id;
+    })[0]
+  );
 
   const generatePokemonJSX = () => {
     const { name, id, species, height, weight, types, sprites } = pokemon;
@@ -40,5 +45,3 @@ const PokemonCard = (props) => {
 };
 
 export default PokemonCard;
-
-
