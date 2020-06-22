@@ -24,8 +24,8 @@ const useSyles = makeStyles({
 
 const PokemonCard = (props) => {
   const classes = useSyles();
-  const { id, name } = props.pokemon;
-  const sprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+  const { id, name, sprite } = props.pokemon;
+  //const sprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 
   return (
     //6 pokemons por linha item xs={2}
