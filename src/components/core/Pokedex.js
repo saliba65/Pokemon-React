@@ -24,16 +24,14 @@ const Pokedex = (props) => {
 			.then(function (response) {
 				const {data} = response;
 				const {results} = data;
-				const newPokemonData = [];
-				results.forEach((pokemon, index) => {
-					newPokemonData.push({
-						id: index + 1,
-						name: pokemon.name,
-						sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-							index + 1
-						}.png`,
-					});
-				});
+				const newPokemonData = results.map((pokemon, index) => ({
+					id: index + 1,
+					name: pokemon.name,
+					sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+						index + 1
+					}.png`,
+				}));
+
 				setPokemonData(newPokemonData);
 			});
 	}, []);
