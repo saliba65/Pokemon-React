@@ -1,65 +1,58 @@
-import React, { useState, useEffect } from "react";
-import mockData from "components/core/mockData";
-import { Typography, Link, CircularProgress, Button } from "@material-ui/core";
-import { toFirstCharUppercase } from "utils/constants/constants";
+import React, {useState, useEffect} from "react";
+import {Typography, Link, Grid} from "@material-ui/core";
+import {toFirstCharUppercase} from "utils/constants/constants";
 import axios from "axios";
 
 const PokemonCard = (props) => {
-  const { history, match } = props;
-  const { params } = match;
-  const { pokemonId } = params;
-  const [pokemon, setPokemon] = useState(
-    mockData.filter((pokemon) => {
-      console.log(pokemon.id, parseInt(pokemonId));
-      return parseInt(pokemonId) === pokemon.id;
-    })[0]
-    // useState(undefined)
-  );
+	const {match} = props;
+	const {params} = match;
+	const {pokemonId} = params;
+	const [pokemon, setPokemon] = useState();
 
-  /*
-     useEffect(() => {
-    axios
-      .get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}/`)
-      .then(function (response) {
-        const { data } = response;
-        setPokemon(data);
-      })
-      .catch(function (error) {
-        setPokemon(false);
-      });
-  }, [pokemonId]);
-  */
+	useEffect(() => {
+		axios
+			.get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}/`)
+			.then(function (response) {
+				const {data} = response;
+				setPokemon(data);
+			})
+			.catch(function (error) {
+				setPokemon(false);
+			});
+	}, [pokemonId]);
 
-  const generatePokemonJSX = () => {
-    const { name, id, species, height, weight, types, sprites } = pokemon;
-    const fullImageUrl = `https://pokeres.bastionbot.org/images/pokemon/${id}.png`;
-    const { front_default } = sprites;
-    return (
-      <>
-        <Typography variant="h1">
-          {`${id}.`} {toFirstCharUppercase(name)}
-          <img src={front_default} />
-        </Typography>
-        <img style={{ width: "300px", height: "300px" }} src={fullImageUrl} />
-        <Typography variant="h3">Pokemon Info</Typography>
-        <Typography>
-          {"Species: "}
-          <Link href={species.url}>{species.name} </Link>
-        </Typography>
-        <Typography>Height: {height} </Typography>
-        <Typography>Weight: {weight} </Typography>
-        <Typography variant="h6"> Types:</Typography>
-        {types.map((typeInfo) => {
-          const { type } = typeInfo;
-          const { name } = type;
-          return <Typography key={name}> {`${name}`}</Typography>;
-        })}
-      </>
-    );
-  };
-  return <> {generatePokemonJSX()}</>;
+	return pokemon ? (
+		<Grid container spacing={2}>
+			<Grid item xs={12} sm={12} md={12} lg={12} key={pokemon.id}>
+				<Typography variant="h1">
+					{`${pokemon.id}.`} {toFirstCharUppercase(pokemon.name)}
+					<img src={pokemon.sprites.front_default} alt="" />
+				</Typography>
+				<img
+					style={{width: "300px", height: "300px"}}
+					src={`https://pokeres.bastionbot.org/images/pokemon/${pokemon.id}.png`}
+					alt=""
+				/>
+				<Typography variant="h3">Pokemon Info</Typography>
+				<Typography>
+					{"Species: "}
+					<Link href={pokemon.species.url}>{pokemon.species.name} </Link>
+				</Typography>
+				<Typography>Height: {pokemon.height} </Typography>
+				<Typography>Weight: {pokemon.weight} </Typography>
+				<Typography variant="h6"> Types:</Typography>
+				{pokemon.types.map((typeInfo) => {
+					const {type} = typeInfo;
+					const {name} = type;
+					return <Typography key={name}> {`${name}`}</Typography>;
+				})}
+			</Grid>
+		</Grid>
+	) : (
+		<Typography> Pokemon not found </Typography>
+	);
 
-  /*
+	/*
   // 1. pokemon - undefined
   // -> return loading progress
 
@@ -73,7 +66,7 @@ const PokemonCard = (props) => {
     <>
       {pokemon === undefined && <CircularProgress />}
       {pokemon !== undefined && pokemon && generatePokemonJSX()}
-      {pokemon === false && <Typography> Pokemon not found </Typography>}
+      {pokemon === false && }
       {pokemon !== undefined && (
         <Button variant="contained" onClick={() => history.push("/")}>
           back to pokedex
