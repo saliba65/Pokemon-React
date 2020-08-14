@@ -44,6 +44,11 @@ const Pokedex = (props) => {
 
   const handleSearchChange = (e) => {
     setFilter(e.target.value);
+    const pokemons = pokemonData.filter((pokemon) => {
+      return pokemon.name.indexOf(e.target.value) !== -1;
+    });
+
+    setPokemonData(pokemons);
   };
 
   useEffect(() => {
@@ -81,8 +86,8 @@ const Pokedex = (props) => {
       </AppBar>
       {pokemonData.length ? (
         <Grid container spacing={2} className={classes.pokedexContainer}>
-          {pokemonData.map((pokemon) => {
-            return <PokemonCard pokemon={pokemon} />;
+          {pokemonData.map((pokemon, index) => {
+            return <PokemonCard key={index} pokemon={pokemon} />;
           })}
         </Grid>
       ) : (
@@ -92,5 +97,15 @@ const Pokedex = (props) => {
     </>
   );
 };
+
+{
+  /* <Grid container spacing={2} className={classes.pokedexContainer}>
+{Object.keys(pokemonData).map(
+  (pokemonId) =>
+    pokemonData[pokemonId].name.includes(filter) &&
+    getPokemonCard(pokemonId)
+)}
+</Grid> */
+}
 
 export default Pokedex;
